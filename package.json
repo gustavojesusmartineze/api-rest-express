@@ -11,6 +11,7 @@
   "author": "Gustavo Martínez <gustavomartinez1990@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
     "eslint": "^8.26.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
