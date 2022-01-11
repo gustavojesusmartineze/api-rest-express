@@ -29,6 +29,10 @@ app.get('/products', (req, res) => {
   res.json(products);
 });
 
+app.get('/products/filter', (req, res) => {
+  res.send('Im a filter');
+});
+
 app.get('/products/:productId', (req, res) => {
   // const id = req.params.productId;
   // This is an example using object destructuring
