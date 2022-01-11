@@ -1,4 +1,5 @@
 const express = require('express');
+const { faker } = require('@faker-js/faker');
 
 const app = express();
 const port = 3000;
@@ -12,24 +13,20 @@ app.get('/new-route', (req, res) => {
 });
 
 app.get('/products', (req, res) => {
-  res.json([
-    {
-      name: 'Product0',
-      price: 1000
-    },
-    {
-      name: 'Product1',
-      price: 1400
-    },
-    {
-      name: 'Product2',
-      price: 2400
-    },
-    {
-      name: 'Product3',
-      price: 5000
-    }
-  ]);
+  const { size } = req.query;
+  const limit = size || 10;
+
+  const products = [];
+  for (let i = 0; i < limit; i++) {
+    products.push({
+      name: faker.commerce.productName(),
+      description: faker.commerce.productDescription(),
+      price: parseInt(faker.commerce.price(), 10),
+      image: faker.image.imageUrl(),
+    })
+  }
+
+  res.json(products);
 });
 
 app.get('/products/:productId', (req, res) => {
