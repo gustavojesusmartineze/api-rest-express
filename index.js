@@ -14,14 +14,6 @@ app.get('/new-route', (req, res) => {
   res.send('Hello this is a new route for my app');
 });
 
-app.get('/categories/:categoryId/products/:productId', (req, res) => {
-  const { categoryId, productId } = req.params;
-  res.json({
-    categoryId,
-    productId
-  });
-});
-
 app.get('/users', (req, res) => {
   const { limit, offset } = req.query;
 
