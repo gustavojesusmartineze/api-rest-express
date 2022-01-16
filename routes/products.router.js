@@ -33,22 +33,35 @@ router.post('/', (req, res) => {
   })
 });
 
-router.put('/:id', (req, res) => {
-  const { id } = req.params;
-  const body = req.body;
+router.put('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const body = req.body;
 
-  const product = service.update(id, body);
+    const product = await service.update(id, body);
 
-  res.json(product)
+    res.json(product);
+  } catch (error) {
+    res.status(404).json({
+      message: error.message
+    });
+  }
 });
 
-router.patch('/:id', (req, res) => {
-  const { id } = req.params;
-  const body = req.body;
+router.patch('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const body = req.body;
 
-  const product = service.update(id, body);
+    const product = await service.update(id, body);
 
-  res.json(product)
+    res.json(product);
+  } catch (error) {
+    res.status(404).json({
+      message: error.message,
+      trace: error
+    });
+  }
 });
 
 router.delete('/:id', (req, res) => {
