@@ -78,7 +78,7 @@ router.patch('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
   const { id } = req.params;
 
-  res.json({
+  res.status(204).json({
     message: 'deleted',
     id
   })
