@@ -21,6 +21,26 @@ class ProductsService {
     }
   }
 
+  create({ name, description, price, image}) {
+  }
+
+  find() {
+    return this.products;
+  }
+
+  findOne(id) {
+    return this.products.find((item) => item.id = id);
+
+  }
+
+  update() {
+
+  }
+
+  delete() {
+
+  }
+
 }
 
 module.exports = ProductsService;
