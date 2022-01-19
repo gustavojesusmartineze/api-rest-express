@@ -41,6 +41,7 @@ class ProductsService {
   }
 
   async findOne(id) {
+    // const name = this.getLocal();
     return this.products.find((item) => item.id === id);
   }
 

@@ -14,18 +14,22 @@ router.get('/filter', (req, res) => {
   res.send('Im a filter');
 });
 
-router.get('/:id', (req, res) => {
-  // const id = req.params.id;
-  // This is an example using object destructuring
-  const { id } = req.params;
-  const product = service.findOne(id);
+router.get('/:id', async (req, res, next) => {
+  try {
+    // const id = req.params.id;
+    // This is an example using object destructuring
+    const { id } = req.params;
+    const product = await service.findOne(id);
 
-  res.status(200).json(product);
+    res.status(200).json(product);
+  } catch (error) {
+    next(error);
+  }
 });
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   const body = req.body;
-  const product = service.create(body);
+  const product = await service.create(body);
 
   res.status(201).json({
     message: 'created',
