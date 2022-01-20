@@ -38,7 +38,7 @@ class ProductsService {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve(this.products);
-      }, 5000);
+      }, 3000);
     });
   }
 
@@ -47,6 +47,9 @@ class ProductsService {
     const product = this.products.find((item) => item.id === id);
     if (!product) {
       throw boom.notFound('product not found');
+    }
+    if (product.isBlocked) {
+      throw boom.conflict('product is block');
     }
 
     return product;
