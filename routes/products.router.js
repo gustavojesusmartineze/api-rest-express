@@ -1,5 +1,7 @@
 const express = require('express');
 const ProductsService = require('./../services/product.service');
+const validatorHandler = require('./../middlewares/validator.handler');
+const { getProductSchema } = require('./../schemas/product.schema');
 
 const router = express.Router();
 const service = new ProductsService();
@@ -14,16 +16,18 @@ router.get('/filter', (req, res) => {
   res.send('Im a filter');
 });
 
-router.get('/:id', async (req, res, next) => {
-  try {
-    // const id = req.params.id;
-    // This is an example using object destructuring
-    const { id } = req.params;
-    const product = await service.findOne(id);
+router.get('/:id',
+  validatorHandler(getProductSchema, 'params'),
+  async (req, res, next) => {
+    try {
+      // const id = req.params.id;
+      // This is an example using object destructuring
+      const { id } = req.params;
+      const product = await service.findOne(id);
 
-    res.status(200).json(product);
-  } catch (error) {
-    next(error);
+      res.status(200).json(product);
+    } catch (error) {
+      next(error);
   }
 });
 
