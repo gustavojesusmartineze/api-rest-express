@@ -10,7 +10,7 @@ const whitelist = ['http://localhost:5500', 'http://localhost:3500'];
 
 const options = {
   origin: (origin, callback) => {
-    if (whitelist.includes(origin)) {
+    if (whitelist.includes(origin) || !origin) { //!origin is to allow same origin
       callback(null, true);
     } else {
       callback(new Error('Forbidden'))
