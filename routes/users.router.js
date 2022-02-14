@@ -1,7 +1,20 @@
 const express = require('express');
-const { faker } = require('@faker-js/faker');
+
+const UserService = require('./../services/user.service');
+const validatorHandler = require('./../middlewares/validator.handler');
+const { updateUserSchema, createUserSchema, getUserSchema } = require('./../schemas/user.schema');
 
 const router = express.Router();
+const service = new UserService();
+
+router.get('/', async (req, res, next) => {
+  try {
+    const categories = await service.find();
+    res.json(categories);
+  } catch (error) {
+    next(error);
+  }
+});
 
 router.get('/filtered', (req, res) => {
   const { limit, offset } = req.query;
@@ -16,18 +29,30 @@ router.get('/filtered', (req, res) => {
   }
 });
 
-router.get('/', (req, res) => {
-  const users = [];
-  const { size } = req.query;
-  const limit = size || 10;
-  for (let i = 0; i < limit; i++) {
-    users.push({
-      name: faker.name.firstName(),
-      lastName: faker.name.lastName(),
-      image: faker.image.imageUrl(),
-    });
+router.get('/:id',
+  validatorHandler(getUserSchema, 'params'),
+  async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const category = await service.findOne(id);
+      res.json(category);
+    } catch (error) {
+      next(error);
+    }
   }
-  res.json(users);
-});
+);
+
+router.post('/',
+  validatorHandler(createUserSchema, 'body'),
+  async (req, res, next) => {
+    try {
+      const body = req.body;
+      const newCategory = await service.create(body);
+      res.status(201).json(newCategory);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
 module.exports = router;
