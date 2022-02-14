@@ -8,7 +8,7 @@ function errorHandler (err, req, res, next) {
   console.error('errorHandler middleware');
   res.status(500).json({
     message: err.message,
-    stack: err.stack
+    stack: err.stack,
   });
 }
 function boomErrorHandler (err, req, res, next) {
