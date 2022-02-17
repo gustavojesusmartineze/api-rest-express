@@ -1,4 +1,4 @@
-const { sequelize } = require('./../libs/sequelize');
+const { models } = require('./../libs/sequelize');
 
 class UserService {
   constructor() {
@@ -9,8 +9,7 @@ class UserService {
   }
 
   async find() {
-    const query = 'SELECT * FROM task';
-    const [data] = await sequelize.query(query);
+    const data = await models.User.findAll();
 
     return data;
   }
