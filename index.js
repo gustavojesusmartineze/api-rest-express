@@ -1,7 +1,12 @@
 const express = require('express');
 const cors = require('cors');
 const routerApi = require('./routes/index');
-const { logErrors, errorHandler, boomErrorHandler } = require('./middlewares/error.handler')
+const {
+  logErrors,
+  errorHandler,
+  boomErrorHandler,
+  ormErrorHandler
+} = require('./middlewares/error.handler')
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -31,6 +36,7 @@ routerApi(app);
 // Keep in mind that the the order of execution is the same as
 // the order that the middleware are added
 app.use(logErrors);
+app.use(ormErrorHandler);
 app.use(boomErrorHandler);
 app.use(errorHandler);
 
