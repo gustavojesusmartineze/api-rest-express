@@ -38,3 +38,11 @@ services:
       - 3306:3306
     volumes:
       - ./mysql_data:/var/lib/mysqlql/data
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin123
+      - PMA_HOST=mysql # name of mysql service
+    ports:
+      - 8080:80
