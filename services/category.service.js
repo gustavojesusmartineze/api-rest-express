@@ -22,7 +22,7 @@ class CategoryService {
     });
 
     if (!cateogry) {
-      throw boom.notFound('cateogry not found');
+      throw boom.notFound('category not found');
     }
 
     return cateogry;
