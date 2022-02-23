@@ -10,14 +10,16 @@ const config = {
       port: process.env.POSTGRES_PORT || 6603,
       user: process.env.POSTGRES_USER || 'root',
       password: process.env.POSTGRES_PASSWORD || 'admin123',
-      database: process.env.POSTGRES_DATABASE || 'socialapp'
+      database: process.env.POSTGRES_DATABASE || 'socialapp',
+      dbUrl: process.env.DATABASE_URL
     },
     mysql : {
       host: process.env.MYSQL_HOST || '127.0.0.1',
       port: process.env.MYSQL_PORT || 3306,
       user: process.env.MYSQL_USER || 'root',
       password: process.env.MYSQL_PASSWORD || 'admin123',
-      database: process.env.MYSQL_DATABASE || 'socialapp'
+      database: process.env.MYSQL_DATABASE || 'socialapp',
+      dbUrl: process.env.DATABASE_URL
     }
   }
 }
