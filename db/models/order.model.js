@@ -38,6 +38,7 @@ class Order extends Model {
     });
 
     this.belongsToMany(models.Product, {
+      as: 'items',
       through: models.OrderProduct,
       foreignKey: 'orderId',
       otherKey: 'productId'
