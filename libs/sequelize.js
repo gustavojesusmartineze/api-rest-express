@@ -13,9 +13,11 @@ const options = {
 
 if (config.env === 'prod') {
   URI = config.db[ENGINE].dbUrl;
-  options.ssl = {
-    rejectUnauthorized: false
-  }
+  options.dialectOptions = {
+    ssl: {
+      rejectUnauthorized: false
+    }
+  };
 } else {
   const USER = encodeURIComponent(config.db[ENGINE].user);
   const PASSWORD = encodeURIComponent(config.db[ENGINE].password);
