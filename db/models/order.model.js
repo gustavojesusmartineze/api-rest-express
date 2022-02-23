@@ -27,6 +27,19 @@ const OrderSchema = {
     field: 'created_at',
     defaultValue: Sequelize.NOW,
   },
+  total: {
+    type: DataTypes.VIRTUAL,
+    get() {
+      // items is the name of the asociation
+      if (this.items.length > 0) {
+        return this.items.reduce((total, current) => {
+          return total + (current.price * current.OrderProduct.amount);
+        }, 0)
+      }
+
+      return 0;
+    }
+  }
 }
 
 
