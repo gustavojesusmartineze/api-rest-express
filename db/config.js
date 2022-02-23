@@ -14,7 +14,10 @@ module.exports = {
     dialect: ENGINE,
   },
   production: {
-    url: URI,
+    url: config.db[ENGINE].dbUrl,
     dialect: ENGINE,
+    ssl: {
+      rejectUnauthorized: false
+    }
   }
 }
