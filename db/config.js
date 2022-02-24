@@ -16,8 +16,10 @@ module.exports = {
   production: {
     url: config.db[ENGINE].dbUrl,
     dialect: ENGINE,
-    ssl: {
-      rejectUnauthorized: false
+    dialectOptions: {
+      ssl: {
+        rejectUnauthorized: false
+      }
     }
   }
 }
